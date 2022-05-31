@@ -1,0 +1,955 @@
+Exercise1
+
+Account.java
+
+package LAB4EXERCISE1;
+public class Account extends Person {
+	
+	private long accNum;
+	private double balance;
+	
+	
+	
+	public long getAccNum() {
+		return accNum;
+	}
+
+	public void setAccNum(long accNum) {
+		this.accNum = accNum;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public Account() {
+		super();
+		
+	}
+
+	public Account(long accNum, double balance) {
+		super();
+		this.accNum = accNum;
+		this.balance = balance;
+	}
+
+public void deposit(double depositCash) {
+	
+	balance = balance + depositCash;
+	System.out.println("Cash Deposit Successful!");
+	
+}
+
+
+public void withdraw(double withdrawCash) {
+	balance = balance - withdrawCash;
+	System.out.println("Cash Withdrawal Successful!");
+	
+}
+
+public void getBalance(double balance) {
+	
+	System.out.println("Current Balance : " + balance);
+	
+}
+
+}
+
+
+CurrentAccount.java
+
+package LAB4EXERCISE1;
+class CurrentAccount extends Account{
+	
+	private double overdraftLimit;
+
+
+	public CurrentAccount() {
+		super();
+		
+	}
+	
+	public CurrentAccount(long accNum, double balance) {
+		super(accNum, balance);
+		
+	}
+
+	@Override
+	public void withdraw(double withdrawCash) {
+		
+		super.withdraw(withdrawCash);
+		
+		if((super.getBalance() + withdrawCash) > overdraftLimit) {
+			System.out.println("Overdraft Limit Exceeded");
+		}
+		else {
+			System.out.println("Overdraft Limit has not Exceeded");
+			
+		}
+	}
+
+	public double isOverdraftLimit() {
+		return overdraftLimit;
+	}
+
+	public void setOverdraftLimit(double overdraftLimit) {
+		this.overdraftLimit = overdraftLimit;
+	}
+	
+	
+}
+
+
+MainApp.java
+
+package LAB4EXERCISE1;
+import java.util.Scanner;
+
+public class MainApp {
+	
+	public static void main(String [] args) {
+		
+		Account a1 = new Account();
+		Account a2 = new Account();
+		
+		a1.setName("Smith");
+		a1.setAccNum(201834435665L);
+		a1.setAge(21);
+		a1.setBalance(2000);
+		
+		a2.setName("Kathy");
+		a2.setAccNum(201586754321L);
+		a2.setAge(19);
+		a2.setBalance(3000);
+		
+		
+		while(true) {
+			
+			System.out.println("-----------Welcome to lakshmi chandana Bank-----------");
+			System.out.println("1.Smith's Account Access");
+			System.out.println("2.Kathy's Account Access");
+			System.out.println("3.Smith's Deposit Cash ");
+			System.out.println("4.Smith's Withdraw Cash");
+			System.out.println("5.Kathy's Deposit Cash");
+			System.out.println("6.Kathy's Withdraw Cash");
+			System.out.println("7.EXIT APP");
+			System.out.println("----------------------------------------------------------------");
+			
+			
+			Scanner sc = new Scanner(System.in);
+			int choise = sc.nextInt();
+			
+			switch(choise) {
+			case 1:
+				System.out.println("Account Holder Name : " + a1.getName() + "\n"+
+									"Account Number : " + a1.getAccNum() + "\n" +
+									"Age : " + a1.getAge() + "\n" +
+									"Current Balance : " + a1.getBalance() + "\n");
+				break;
+				
+			case 2:
+				System.out.println("Account Holder Name : " + a2.getName() + "\n"+
+									"Account Number : " + a2.getAccNum() + "\n" +
+									"Age : " + a2.getAge() + "\n" +
+									"Current Balance : " + a2.getBalance() + "\n");
+				break;
+				
+		
+			case 3:
+				System.out.println("<< Smith's Account OPEN NOW >>");
+				System.out.println("How much you want to Deposit ?");
+				int depositamt = sc.nextInt();
+				a1.deposit(depositamt);
+				break;
+				
+			case 4:
+				System.out.println("<< Smith's Account OPEN NOW >>");
+				System.out.println("How much you want to Withdraw ?");
+				int withdrawamt = sc.nextInt();
+				a1.withdraw(withdrawamt);
+				break;
+				
+			case 5:
+				System.out.println("<< Kathy's Account OPEN NOW >>");
+				System.out.println("How much you want to Deposit ?");
+				int depositamt2 = sc.nextInt();
+				a2.deposit(depositamt2);
+				break;
+				
+			case 6:
+				System.out.println("<< Kathy's Account OPEN NOW >>");
+				System.out.println("How much you want to Withdraw ?");
+				int withdrawamt2 = sc.nextInt();
+				a2.withdraw(withdrawamt2);
+				break;
+			
+			case 7:
+				System.out.println("Thanks for using KOTAK Banking App");
+				System.exit(0);
+				
+
+			}
+			
+	}
+		}
+	
+	}//end
+
+
+Person.java
+
+package LAB4EXERCISE1;
+public class Person {
+	
+	private String name;
+	private float age;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public float getAge() {
+		return age;
+	}
+
+
+	public void setAge(float age) {
+		this.age = age;
+	}
+
+
+	public Person(String name, float age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+
+
+	public Person() {
+		super();
+	
+	}
+	
+
+}
+
+SavingsAccount.java
+
+package LAB4EXERCISE1;
+class SavingsAccount extends Account{
+	
+	private double minimumBalance=500;
+
+	
+	public SavingsAccount() {
+		super();
+		
+	}
+
+	
+	public SavingsAccount(long accNum, double balance) {
+		super(accNum, balance);
+	
+	}
+
+	@Override
+	public void withdraw(double withdrawCash) {
+		super.withdraw(withdrawCash);
+		
+		if((super.getBalance() - withdrawCash) <= minimumBalance) {
+	        super.withdraw(withdrawCash);
+	}else {
+		System.out.println("Cannot Withdraw minimum Balance is 500/-");
+	}
+		
+	}
+
+
+	public double getMinimumBalance() {
+		return minimumBalance;
+	}
+
+
+	public void setMinimumBalance(double minimumBalance) {
+		this.minimumBalance = minimumBalance;
+	}
+	
+}
+
+
+Exercise2
+
+Employee.java
+
+package com.cg.eis.bean;
+
+public class Employee {
+	
+	private int id;
+	private String name;
+	private double salary;
+	private String designation;
+	private String insuranceScheme;
+	
+	public Employee() {
+		super();
+		
+	}
+
+	public Employee(int id, String name, double salary, String designation, String insuranceScheme) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.designation = designation;
+		this.insuranceScheme = insuranceScheme;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getInsuranceScheme() {
+		return insuranceScheme;
+	}
+
+	public void setInsuranceScheme(String insuranceScheme) {
+		this.insuranceScheme = insuranceScheme;
+	}
+	
+	
+}
+
+
+EmployeeService.java
+
+
+package com.cg.eis.pl;
+import com.cg.eis.bean.Employee;
+import java.util.Scanner;
+
+public interface EmployeeService {
+	
+	public  void getEmpDetails(); 	
+	
+	public  void findInsScheme(double salary); 
+		
+	public  void displayDetails(); 
+		
+
+}
+
+Service.java
+
+
+package com.cg.eis.pl;
+import com.cg.eis.bean.Employee;
+import java.util.Scanner;
+
+public class Service extends Employee implements EmployeeService  {
+
+	@Override
+	public void getEmpDetails() {
+		System.out.println("Enters into the get employee details");
+		getEmpDetails();
+		
+	}
+
+	@Override
+	public void findInsScheme(double salary) {
+		
+		if(salary < 90_000 ) {
+			System.out.println("Policy-1");
+		}else if(salary >= 50_000 && salary < 85_000) {
+			System.out.println("Policy-2");
+		}else {
+			System.out.println("Premium Policy");
+		}
+		
+		
+	}
+
+	@Override
+	public void displayDetails() {
+		
+		System.out.println("Employee Id: "+getId());
+		System.out.println("Employee Name: "+getName());
+		System.out.println("Employee Salary: "+getSalary());
+		System.out.println("Employee Deignation: "+getDesignation());
+		
+		
+	}	
+	
+}
+
+
+MainApp.java
+
+package com.cg.eis.service;
+
+import com.cg.eis.bean.Employee;
+import com.cg.eis.pl.Service;
+
+import java.util.Scanner;
+public class MainApp {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		Service e1 = new Service();
+		
+		while(true) {
+		System.out.println("Enter ID Number of Employee");
+		int id = sc.nextInt();
+		e1.setId(id);
+		
+		System.out.println("Enter First Name of Employee");
+		String name = sc.next();
+		e1.setName(name);
+		
+		System.out.println("Enter Salary of Employee");
+		double salary = sc.nextDouble();
+		e1.setSalary(salary);
+		
+		System.out.println("Enter Designation of Employee");
+		String designation = sc.next();
+		e1.setDesignation(designation);
+		System.out.println("_____________________________________________________________");
+		
+		e1.displayDetails();
+		System.out.println("Insurance Policy: ");
+		e1.findInsScheme(salary);
+		System.out.println("_____________________________________________________________");
+		
+		}
+		
+	}
+
+}
+
+
+Exercise3
+
+Book.java
+
+package capglab4exe2;
+
+public class Book extends WrittenItem{
+
+	public Book(int number, String title, int numberOfCopies, String authorName) {
+		super(number, title, numberOfCopies, authorName);
+	}
+
+	public Book() {
+		
+	}
+
+	
+    
+}
+
+
+
+CD.java
+
+package capglab4exe2;
+
+public class CD extends MediaItems{
+
+	private String artistName;
+      private String genre;
+	public CD() {
+		super();
+	}
+
+	public CD(int runtime, String artistName, String genre) {
+		super(runtime);
+		this.artistName = artistName;
+		this.genre = genre;
+	}
+
+	public String getArtistName() {
+		return artistName;
+	}
+
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+    @Override
+	public void print() {
+		super.print();
+		System.out.println("The artist name: "+artistName);
+		System.out.println("The genre: "+genre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean isSame = true;
+		if(obj instanceof CD)
+		{
+		  CD i = (CD)obj;	
+		  
+		  boolean a = this.artistName.equals(i.artistName);
+		  boolean b = this.genre.equals(i.genre);
+		  
+		  return super.equals(obj) && a && b;
+			
+		}
+		return isSame;
+		
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"ArtistName: "+artistName+"Genre"+genre;
+	}
+	
+      
+}
+
+
+Item.java
+
+package capglab4exe2;
+
+public abstract class Item{
+	
+	private int number;
+	private String title;
+	private int numberOfCopies;
+	
+	public Item() {
+		super();
+	}
+	
+	public Item(int number, String title, int numberOfCopies) {
+		super();
+		this.number = number;
+		this.title = title;
+		this.numberOfCopies = numberOfCopies;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public int getNumberOfCopies() {
+		return numberOfCopies;
+	}
+	public void setNumberOfCopies(int numberOfCopies) {
+		this.numberOfCopies = numberOfCopies;
+	}
+	public int checkIn(int numberOfCopies) {
+		return this.numberOfCopies += numberOfCopies;
+	}
+	public int checkOut(int numberOfCopies) {
+		return this.numberOfCopies -= numberOfCopies;
+	}
+	
+	public void print()
+	{
+		System.out.println("The BookNumber: "+number);
+		System.out.println("The Book Title: "+title);
+		System.out.println("The Book Number of Copies: "+numberOfCopies);
+	}
+	public void AddItems(){
+		System.out.println("Items are added");
+	}
+	@Override
+	public boolean equals(Object obj) {
+		boolean isSame = false;
+		// code to compare e1 and e2
+		
+		if(obj instanceof Item)
+		{
+		  Item i = (Item)obj;	
+		  
+		  boolean a = this.number == i.number;
+		  boolean b = (this.numberOfCopies == i.numberOfCopies);
+		  boolean c = this.title.equals(i.title);
+		  
+		  return a&&b&&c;
+			
+		}
+		return isSame;
+	}
+	@Override
+	public String toString() {
+		return "Id: "+number+" - "+"Title: "+title+"Number of Copies"+numberOfCopies;
+	}
+	
+}
+
+
+JournalPaper.java
+
+package capglab4exe2;
+
+public class JournalPaper extends WrittenItem{
+	private int publishedYear;
+
+	public JournalPaper() {
+		super();
+	}
+
+	public JournalPaper(int number, String title, int numberOfCopies, String authorName, int publishedYear) {
+		super(number, title, numberOfCopies, authorName);
+		this.publishedYear = publishedYear;
+	}
+
+	public int getPublishedYear() {
+		return publishedYear;
+	}
+
+	public void setPublishedYear(int publishedYear) {
+		this.publishedYear = publishedYear;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		boolean isSame = false;
+		if(obj instanceof JournalPaper) {
+			JournalPaper j = (JournalPaper)obj;
+			boolean a = this.publishedYear == j.publishedYear;
+			return super.equals(obj) && a;
+		}
+		return isSame;
+	}
+    
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		super.print();
+		System.out.println("The book Published year: "+publishedYear);
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString()+"Publihed Year: "+publishedYear;
+	}
+}
+
+
+
+MainLibrary.java
+
+package capglab4exe2;
+
+import java.util.Scanner;
+public class MainLibrary {
+	static Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) {
+		
+		MainLibrary ml = new MainLibrary();
+			
+		while(true) {
+			System.out.println("Enter the option:\n1.Book Details\n2.Journal Paper Detais\n3.Video Details\n4.CD Details");
+			int option = sc.nextInt();
+			
+			switch(option) {
+			  case 1: ml.booksMethod(new Book());
+			        break;
+			  case 2:ml.booksMethod(new JournalPaper());
+			        break;
+			  case 3:ml.mediaMethod(new Video());
+			        break;
+			  case 4:ml.mediaMethod(new CD());
+			        break;
+			        
+			  
+			}
+				
+		}
+	}
+	public void booksMethod(WrittenItem i) {
+		System.out.println("_________________________________________________");
+		System.out.println("The Book Number is");
+		i.setNumber(sc.nextInt());
+		System.out.println("The Book title is");
+		i.setTitle(sc.next());
+		System.out.println("The Book Number of copy");
+        i.setNumberOfCopies(sc.nextInt());
+        System.out.println("The Author is");
+        i.setAuthorName(sc.next());
+        if(i instanceof Book) {
+        	i.print();
+        }
+		if(i instanceof JournalPaper) {
+			System.out.println("_________________________________________________");
+			System.out.println("The published year");
+			((JournalPaper) i).setPublishedYear(sc.nextInt());
+			i.print();
+		}
+	}
+	public void mediaMethod(MediaItems mi) {
+		System.out.println("_________________________________________________");
+		System.out.println("Enter the runtime");
+		mi.setRuntime(sc.nextInt());
+		if(mi instanceof Video) {
+			System.out.println("The director is");
+			((Video) mi).setDirector(sc.next());
+			System.out.println("The genre is");
+			((Video) mi).setGenre(sc.next());
+			System.out.println("The year of release");
+			((Video) mi).setYear(sc.nextInt());
+			((Video) mi).print();
+		}
+		if(mi instanceof CD) {
+			System.out.println("_________________________________________________");
+			System.out.println("Artist Name");
+			((CD) mi).setArtistName(sc.next());
+			System.out.println("the genre is");
+			((CD) mi).setGenre(sc.next());
+			((CD) mi).print();
+		}
+	}
+
+}
+
+
+MediaItems.java
+
+
+package capglab4exe2;
+
+public abstract class MediaItems extends Item {
+	private int runtime;
+    
+	
+	public MediaItems() {
+		super();
+	}
+
+
+	public MediaItems( int runtime) {
+		super();
+		this.runtime = runtime;
+	}
+
+
+	public int getRuntime() {
+		return runtime;
+	}
+
+
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
+
+
+	@Override
+	public void print() {
+		System.out.println("The runtime is: "+runtime);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean issame = false;
+		if(obj instanceof MediaItems) {
+			MediaItems mi = (MediaItems)obj;
+			boolean a = this.runtime == mi.runtime;
+		 return a;
+		}
+		return issame;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Runtime: "+runtime;
+	}
+	
+	
+
+}
+
+Video.java
+
+package capglab4exe2;
+
+import com.cg.eis.bean.Employee;
+
+public class Video extends MediaItems{
+	
+	
+	private String director;
+	private String genre;
+	private int year;
+	
+	public Video() {
+		super();
+	}
+	
+	public Video(int runtime,String director, String genre, int year) {
+		
+		super(runtime);
+		this.director = director;
+		this.genre = genre;
+		this.year = year;
+	}
+	
+	public String getDirector() {
+		return director;
+	}
+	public void setDirector(String director) {
+		this.director = director;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
+	
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		super.print();
+		System.out.println("The director: "+director);
+		System.out.println("The genre: "+genre);
+		System.out.println("The Year of release: "+year);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		boolean isSame = false;
+		// code to compare e1 and e2
+		
+		if(obj instanceof Employee)
+		{
+		  Video e = (Video)obj;	
+		  
+		  boolean a = this.director.equals(e.director);
+		  boolean b = this.year == e.year;
+		  boolean c = this.genre.equals(e.genre);
+		  
+		  return super.equals(obj) && a && b && c;
+			
+		}
+		return isSame;
+		
+	}
+	@Override
+	public String toString() {
+		return super.toString()+"Director: "+director+"Genre: "+genre+"Year: "+year;
+	}
+	
+    
+}
+
+
+WrittenItem.java
+
+package capglab4exe2;
+
+	public abstract class WrittenItem extends Item{
+		private String authorName;
+
+		public WrittenItem() {
+			super();
+		}
+		public WrittenItem(int number, String title, int numberOfCopies, String authorName) {
+			super(number, title, numberOfCopies);
+			this.authorName = authorName;
+		}
+
+		public String getAuthorName() {
+			return authorName;
+		}
+		
+		public void setAuthorName(String authorName) {
+			this.authorName = authorName;
+		}
+		
+		
+		@Override
+		public boolean equals(Object obj) {
+			boolean isSame = false;
+			
+			if(obj instanceof Item)
+			{
+			  WrittenItem i = (WrittenItem)obj;	
+			  boolean a = this.authorName.equals(i.authorName);
+			  
+			  return super.equals(obj) && a;
+				
+			}
+			return isSame;
+		}
+		@Override
+		public String toString() {
+			return super.toString()+"Author Name: "+authorName;
+		}
+		@Override
+		public void print() {
+			super.print();
+			System.out.println("The Book Author is: "+authorName);
+		}
+		
+
+	}

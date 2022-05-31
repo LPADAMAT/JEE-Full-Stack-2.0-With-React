@@ -1,0 +1,131 @@
+Exercise1
+
+Age.java
+
+package LAB5;
+import java.util.Scanner;
+public class ExceptionHandlingDemo
+{
+	public static void main(String[]args)
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the age:");
+		int age = sc.nextInt();
+		try 
+		{
+			if(age<18)
+			{
+				throw new InvalidAge("Enter age greater than 15:");
+			}
+			else
+				System.out.println("valid age");
+		}
+	   catch (Exception e)
+	   {
+	    	e.printStackTrace();
+	   }
+    }
+}
+
+InvalidAge.java
+
+package LAB5;
+
+public class InvalidAge extends RuntimeException{
+
+	public InvalidAge(String message) {
+		super(message);
+	}
+
+}
+
+
+
+Exercise-2
+
+ExceptionName.java
+
+package LAB5;
+import java.util.Scanner;
+public class ExceptionName {
+	public static void main(String[]args)
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter first name:");
+		String firstname = sc.nextLine();
+		System.out.println("Enter last name:");
+		String lastname = sc.nextLine();
+		try {
+			if((firstname.length()==0)&&(lastname.length()==0))
+				throw new InvalidName("invalid Character");
+			else
+				System.out.println("valid name");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+				
+		}
+	}
+
+}
+
+
+InvalidName.java
+
+package LAB5;
+
+public class InvalidName extends RuntimeException {
+
+	public InvalidName(String message) {
+		super(message);
+	}
+
+}
+
+
+Exercise-3
+
+EmployeeException.java
+
+package LAB5;
+import java.util.Scanner;
+public class EmployeeException {
+	public static void main(String[]args)
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the employee salary:");
+		int salary = sc.nextInt();
+		try
+		{
+			if(salary < 3000)
+			{
+				throw new InvalidSalary("Employtee salary is above 3000");
+			}
+			else
+			{
+				System.out.println("Employee salary is valid");
+			}
+		}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+
+InvalidSalary.java
+
+
+package LAB5;
+
+public class InvalidSalary extends RuntimeException {
+
+	public InvalidSalary(String message) {
+		super(message);
+	
+	}
+
+}

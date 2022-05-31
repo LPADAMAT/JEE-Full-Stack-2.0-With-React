@@ -1,0 +1,246 @@
+SumByTokenizer.java
+
+package LAB3;
+
+import java.util.*;
+
+public class SumByTokenizer {
+	
+	public static void main(String[] args) {
+		
+		int sum = 0;
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Enter the Numbers as Strings ----->");
+        String s = sc.nextLine();
+        
+        System.out.println("You Entered ----->" + s);
+        
+        StringTokenizer st = new StringTokenizer(s," ");
+        while(st.hasMoreTokens()) {
+        	
+        	int i = Integer.parseInt(st.nextToken());
+        	System.out.println(i);
+        	sum += i;	
+        }
+        System.out.println("The sum is: "+sum);
+        sc.close();
+	}
+        
+}
+
+
+MirrorImage.java
+
+package LAB3;
+import java.util.Scanner;
+
+public class MirrorImage {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter a String here---->");
+		String str = sc.next();
+		getImage(str);
+		
+		
+	
+		
+	}
+	
+	
+	static void getImage(String str){
+		
+		String string=str;
+		String reverse = new StringBuffer(string).reverse().toString();
+		System.out.println(string + "|" + reverse);
+		
+		
+		
+	}
+}
+
+
+Consonant.java
+
+package LAB3;
+import java.util.Scanner;
+public class Consonant {
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Enter a String here ---->");
+		Scanner sc = new Scanner(System.in);
+		Consonant con = new Consonant();
+		
+		String s = sc.nextLine();
+		sc.close();
+		con.alterString(s);
+	}
+    
+	public void alterString(String str) {
+    	
+		char arr[] = str.toCharArray();
+    	StringBuffer st = new StringBuffer();
+    	
+    	for(int j = 0;j < arr.length;j++) {
+    	   
+    		if(arr[j] == 'a'||arr[j] == 'e'||arr[j] == 'i' || arr[j] == 'o' || arr[j] == 'u'||arr[j] == 'A'||arr[j] == 'E'||arr[j] == 'I' || arr[j] == 'O' || arr[j] == 'U') {
+    	    		arr[j] = arr[j];
+    	    }else if(arr[j] == 'Z') {
+    	    	arr[j] = 'A';
+    	    }else if(arr[j] == 'z') {
+    	    	arr[j] = 'a';
+    	    }
+    	    else {
+    	    	char ch = arr[j];
+    	    	arr[j] = (char) (ch + 1);
+    	    }
+    	}
+    	for(int i = 0; i < arr.length; i++) {
+    		
+    		st.append(arr[i]);
+    	}
+    	System.out.println(st);
+    }
+}
+
+
+NumberDifference.java
+
+package LAB3;
+
+import java.util.Scanner;
+
+public class NumberDifference {
+	
+      public static void main(String[] args) {
+    	  
+		Scanner sc= new Scanner(System.in);
+		System.out.println("Enter the number ---->");
+		
+		String num = sc.nextLine();
+		NumberDifference nd = new NumberDifference();
+		
+		nd.modifyNumber(num);
+		sc.close();
+	}
+      
+      public void modifyNumber(String num) {
+    	  char arr[] = num.toCharArray();
+    	  
+    	  StringBuffer str = new StringBuffer();
+    	 
+    	  for(int i = 0;i < arr.length - 1;i++) {
+    		  
+    		  int num1 = (int)arr[i];
+    		  int num2 = (int)arr[i + 1];
+    		  
+    		  if(num1 - num2 > 0) {
+    		     
+    			  str.append(num1-num2);
+    			  
+    		  }else if(num2 - num1 >0) {
+    			  
+    			  str.append(num2-num1);
+    		  }
+    	  }
+    	  str.append(num.charAt(num.length()-1));
+    	  System.out.println("Number Difference New Number---->" + str);
+      }
+}
+
+
+Sentence.java
+
+package LAB3;
+import java.util.Scanner; 
+public class Sentence {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter the Sentence here --->");
+		String s = sc.nextLine();
+		
+		char arr[] = s.toCharArray();
+		System.out.println("No. of Characters--->"+arr.length);
+		
+		String arr1[] = s.split("\r\n|\r|\n");
+		System.out.println("No. of Words--->"+arr1.length);
+        
+		String arr2[] = s.split(" ");
+        System.out.println("No. of Lines--->"+arr2.length);
+        sc.close();
+	}
+
+}
+
+
+PositiveString.java
+
+package LAB3;
+import java.util.Scanner;
+public class PositiveString {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Enter a String here ---->");
+		Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine();
+		sc.close();
+		
+		PositiveString ps = new PositiveString();
+		System.out.println(ps.string(str));
+	}
+    public boolean string(String str) {
+    	char arr[] = str.toCharArray();
+    	
+    	for(int i = 0;i < arr.length - 1;i++) {
+    			
+    			int a = (int)arr[i];
+    			int b = (int)arr[i+1];
+    			
+    			if(a > b) {
+    				return false;
+    			}
+    	}
+    	
+    	return true;
+    }
+}
+
+
+
+DurationDate.java
+
+package LAB3;
+import java.time.*;
+import java.util.*;
+
+
+public class DurationDate {
+	
+       public static void main(String[] args) {
+    	   
+    	   System.out.println(" Enter the Date here (YYYY/MM/DD Format Allowed) ----->");
+    	   Scanner sc=new Scanner(System.in);
+    	   
+    	   int year=sc.nextInt();
+    	   int month=sc.nextInt();
+    	   int date=sc.nextInt();
+           
+    	   LocalDate givendate = LocalDate.of(year, month, date);
+           LocalDate presentdate = LocalDate.now();
+           sc.close();
+           
+           Period diff = Period.between(givendate, presentdate);
+           
+           System.out.printf("Difference is" + " " 
+           +diff.getYears()+" years" + " " 
+           +diff.getMonths()+" months " + " " 
+           +diff.getDays()+"days" + " " ); 
+	    
+	}
+}
